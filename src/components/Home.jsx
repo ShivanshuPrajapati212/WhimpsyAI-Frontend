@@ -1,26 +1,32 @@
-import React, { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 const Home = () => {
+  const { logout } = useAuth();
   const navigate = useNavigate();
-  const handleLogout = ()=>{
-    navigate("/api/logout")
-  }
 
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  };
   return (
-    <div>
-      <button className="btn btn-primary" onClick={<Navigate to="/profile" />}>Profile</button>
-      <button
-        className="btn btn-error"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+    <div className="gap-4 flex">
       <button className="btn btn-primary">
+      <a href="/profile">Profile</a>
+      </button>
+      <button className="btn btn-secondary" onClick={handleLogout}>
+        <a>Logout</a>
+      </button>
+      <button className="btn btn-accent">
         <a href="/signup">Sign up</a>
       </button>
-      <button className="btn btn-primary">
+      <button className="btn btn-success">
         <a href="/login">Login</a>
       </button>
     </div>

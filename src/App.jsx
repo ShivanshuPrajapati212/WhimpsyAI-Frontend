@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
+    <div className='font-body'>
     <Router>
       <AuthProvider>
         <Routes>
@@ -19,6 +20,7 @@ function App() {
         </Routes>
       </AuthProvider>
     </Router>
+    </div>
   );
 }
 

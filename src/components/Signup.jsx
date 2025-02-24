@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { FcGoogle } from "react-icons/fc";
+
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -19,8 +21,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 flex flex-col gap-4">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="container mx-auto p-4 flex flex-col gap-4 items-center min-h-screen">
+      <h1 className="text-3xl text-white my-9">Sign Up</h1>
+      <form onSubmit={handleSubmit} className="space-y-4 md:w-[40%]">
         <label className="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,10 +69,16 @@ const Signup = () => {
             required={true}
           />
         </label>
-        <button className="btn btn-primary btn-block font-semibold">
+        <button className="btn btn-secondary btn-block font-semibold">
           Sign Up
         </button>
       </form>
+      <div className="flex flex-col border-opacity-50 md:w-[40%]">
+  <div className="divider">OR</div>
+  <a className="btn btn-secondary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4" href="/api/auth/google">
+  <FcGoogle className="text-3xl"/>Sign up with Google
+        </a>
+</div>
       <a href="/login" className="font-medium underline">
         Have a account?
       </a>

@@ -6,7 +6,11 @@ export default {
     "./src/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: ["'Poppins', sans-serif"] // Replace 'Open Sans' with your chosen font
+    }
+    },
   },
   plugins: [require('daisyui')],
   daisyui: {

@@ -6,8 +6,10 @@ const Profile = () => {
     
       console.log(user)
   return (
-    <div>
-      Hi there
+    <div className='text-xl flex flex-col'>
+      <p>Name: {user?.displayName}</p>
+      <p>Email: {user?.email}</p>
+      <p>ID: {user?._id}</p>
     </div>
   )
 }
