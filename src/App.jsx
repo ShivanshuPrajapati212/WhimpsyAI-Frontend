@@ -1,22 +1,25 @@
-import { useState } from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Signup from './components/Signup'
-import Login from './components/Login'
-import Home from './components/Home'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Home from './components/Home';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup';
+import Profile from './components/Profile';
+import Navbar from './components/Navbar';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
-
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Home/>}>
-    </Route>
-    <Route path='/signup' element={<Signup/>}></Route>
-    <Route path='/login' element={<Login/>}></Route>
-    </Routes>
-    
-    </BrowserRouter>
-  )
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/signup" exact element={<Signup />} />
+          <Route path="/profile" exact element={<PrivateRoute><Profile /></PrivateRoute>} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;

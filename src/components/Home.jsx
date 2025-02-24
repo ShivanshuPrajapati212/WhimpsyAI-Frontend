@@ -1,12 +1,19 @@
 import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 const Home = () => {
+  const navigate = useNavigate();
+  const handleLogout = ()=>{
+    navigate("/api/logout")
+  }
+
   return (
     <div>
-      <button className="btn btn-primary">Dashboard</button>
+      <button className="btn btn-primary" onClick={<Navigate to="/profile" />}>Profile</button>
       <button
         className="btn btn-error"
-        onClick={localStorage.removeItem("authToken")}
+        onClick={handleLogout}
       >
         Logout
       </button>
