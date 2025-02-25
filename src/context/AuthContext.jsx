@@ -14,12 +14,13 @@ export const AuthProvider = ({ children }) => {
   const checkAuthStatus = async () => {
     try {
       const response = await axios.get('/api/auth/profile', { withCredentials: true });
-      // console.log(response)
+      console.log(response)
       setUser(response.data);
     } catch (err) {
       setUser(null);
     }
     setLoading(false);
+    return;
   };
 
   const login = async (credentials) => {
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, checkAuthStatus }}>
       {children}
     </AuthContext.Provider>
   );

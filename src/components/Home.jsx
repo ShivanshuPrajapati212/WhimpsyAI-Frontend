@@ -20,6 +20,12 @@ const Home = () => {
       <button className="btn btn-primary">
       <a href="/profile">Profile</a>
       </button>
+      <button className="btn btn-primary">
+      <a href="/dashboard">Dashboard</a>
+      </button>
+      <button className="btn btn-info">
+      <a href="/onboarding">On Boarding</a>
+      </button>
       <button className="btn btn-secondary" onClick={handleLogout}>
         <a>Logout</a>
       </button>
