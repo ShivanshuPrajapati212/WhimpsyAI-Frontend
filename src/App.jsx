@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
-import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import OnBoarding from './components/OnBoarding.jsx';
 
