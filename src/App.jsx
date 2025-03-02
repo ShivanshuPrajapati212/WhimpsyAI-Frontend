@@ -20,6 +20,7 @@ function App() {
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/profile" exact element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/onboarding" exact element={<PrivateRoute><OnBoarding /></PrivateRoute>} />
+          <Route path="/dashboard" exact element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         </Routes>
       </UserProvider>
       </AuthProvider>

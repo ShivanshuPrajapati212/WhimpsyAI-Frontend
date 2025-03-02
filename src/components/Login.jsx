@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login({ email, password });
-      navigate('/profile');
+      navigate('/onboarding');
     } catch (error) {
       console.error('Login failed');
     }

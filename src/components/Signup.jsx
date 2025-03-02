@@ -14,7 +14,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       await signup({ email, password });
-      navigate("/profile");
+      navigate("/onboarding");
     } catch (error) {
       console.error("Signup failed", error);
     }
