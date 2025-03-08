@@ -1,19 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { UserProvider } from './context/userContext';
 import Home from './components/Home';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import OnBoarding from './components/OnBoarding.jsx';
+import Dashboard from './components/Dashboard.jsx';
+import Provider from './components/Provider.jsx';
 
 function App() {
   return (
     <div className='font-body'>
     <Router>
-      <AuthProvider>
-      <UserProvider>
+        <Provider>
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" exact element={<Login />} />
@@ -22,8 +21,7 @@ function App() {
           <Route path="/onboarding" exact element={<PrivateRoute><OnBoarding /></PrivateRoute>} />
           <Route path="/dashboard" exact element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         </Routes>
-      </UserProvider>
-      </AuthProvider>
+        </Provider>
     </Router>
     </div>
   );
