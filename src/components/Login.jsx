@@ -6,14 +6,13 @@ import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login({ email, password });
-      navigate('/onboarding');
     } catch (error) {
       console.error('Login failed');
     }

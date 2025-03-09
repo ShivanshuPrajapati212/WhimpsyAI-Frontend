@@ -1,11 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import timeLeftBefore24Hours from "../helpers/timeDifference";
 
 const TopicContext = createContext();
 
 
 export const TopicProvider = ({ children }) => {
     const [topic, setTopic] = useState(null)
+    const [loading, setLoading] = useState(true);
+    const [timeLeft, setTimeLeft] = useState(topic ? timeLeftBefore24Hours(topic.date) : [0, 0])
 
 
     useEffect(()=> {
@@ -16,8 +19,8 @@ export const TopicProvider = ({ children }) => {
         try {
             const res = await axios.get('/api/topic/gettopic', { withCredentials: true })
             setTopic(res.data)
-            console.log("Topic Saved Successfully")
-            console.log(topic)
+            setTimeLeft(timeLeftBefore24Hours(res.data.date))
+            setLoading(false);
         } catch (error) {
             console.log("Error Saving Topic" + error)
             setTopic(null)
@@ -25,7 +28,7 @@ export const TopicProvider = ({ children }) => {
     }
 
   return (
-    <TopicContext.Provider value={{ topic, getTopic }}>
+    <TopicContext.Provider value={{ topic, loading, timeLeft, getTopic }}>
       {children}
     </TopicContext.Provider>
   );

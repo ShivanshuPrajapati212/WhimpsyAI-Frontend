@@ -14,6 +14,10 @@ const OnBoarding = () => {
   const {updateUser} = useUser();
   const {user} = useAuth();
 
+  if (user.interests && user.name){
+    navigate("/dashboard")
+  }
+
   // Predefined interest suggestions
   const interestSuggestions = [
     'Photography', 'Cooking', 'Hiking', 'Reading',

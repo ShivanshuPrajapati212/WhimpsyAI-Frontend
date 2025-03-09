@@ -2,23 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useTopic } from "../context/topicContext";
 import youtube from "../assets/youtube.png";
 import browser from "../assets/browser.png";
-import timeLeftBefore24Hours from "../helpers/timeDifference";
+
 
 const Dashboard = () => {
-  const { topic, getTopic } = useTopic();
-  const [loading, setLoading] = useState(topic ? false: true)
-
-  useEffect(() => {
-    getTopic();
-    console.log(topic);
-  }, [loading]);
-
+  const { topic, loading, timeLeft } = useTopic();
+  
   if(loading){
     return <div>Loading</div>
   }
-
-  const [timeLeft, setTimeLeft] = useState(timeLeftBefore24Hours(topic.date))
-  
 
   const getFavicon = (link) => {
     let mainParts = link.split("//");
