@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import timeLeftBefore24Hours from "../helpers/timeDifference";
+import { useAuth } from './authContext';
 
 const TopicContext = createContext();
 
@@ -10,6 +11,7 @@ export const TopicProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [timeLeft, setTimeLeft] = useState(topic ? timeLeftBefore24Hours(topic.date) : [0, 0])
 
+    const {checkAuthStatus} = useAuth();
 
     useEffect(()=> {
         getTopic()
@@ -27,8 +29,18 @@ export const TopicProvider = ({ children }) => {
         }
     }
 
+    const markLearnt  = async (id) => {
+      try { 
+        const res = await axios.post('/api/topic/marklearnt', {resourceId: id}, { withCredentials: true })
+        setTopic(res.data)
+        checkAuthStatus();
+      } catch (error) {
+        console.log("Error in mark learnt" + error)
+      }
+    }
+
   return (
-    <TopicContext.Provider value={{ topic, loading, timeLeft, getTopic }}>
+    <TopicContext.Provider value={{ topic, loading, timeLeft, getTopic, markLearnt }}>
       {children}
     </TopicContext.Provider>
   );

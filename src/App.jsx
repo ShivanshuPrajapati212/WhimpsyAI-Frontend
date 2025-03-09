@@ -7,12 +7,14 @@ import PrivateRoute from './components/PrivateRoute';
 import OnBoarding from './components/OnBoarding.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Provider from './components/Provider.jsx';
+import Navbar from './components/Navbar.jsx';
 
 function App() {
   return (
     <div className='font-body'>
     <Router>
         <Provider>
+          <Navbar/>
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" exact element={<Login />} />

@@ -5,7 +5,7 @@ import browser from "../assets/browser.png";
 
 
 const Dashboard = () => {
-  const { topic, loading, timeLeft } = useTopic();
+  const { topic, loading, timeLeft, markLearnt } = useTopic();
   
   if(loading){
     return <div>Loading</div>
@@ -16,6 +16,11 @@ const Dashboard = () => {
     let subParts = mainParts[1].split("/");
     return `${mainParts[0]}//${subParts[0]}/favicon.ico`;
   };
+
+  const handleLeant = async (id)=> {
+    await markLearnt(id)
+    return;
+  }
 
 
   return (
@@ -30,10 +35,9 @@ const Dashboard = () => {
       </div>
       {topic.resources.map((e) => (
         <div key={e._id} className="gap-3">
-          {e.type == "video" ? (
             <div className="bg-base-200 rounded-md my-2 p-3 flex items-center justify-between">
               <div className="flex items-center justify-start">
-              <img src={youtube} className="h-14 mx-3" />
+              <img src={e.type == "video" ? youtube: getFavicon(e.link)} onError={(e) => { e.target.src = browser; }} className="h-14 mx-3" />
               <div>
                 <h2 className="text-xl text-white my-2">
                   {e.additionalInfo.title}
@@ -41,22 +45,11 @@ const Dashboard = () => {
                 <h2 className="text-md">{e.additionalInfo.desc}</h2>
               </div>
               </div>
-                <a className="btn btn-secondary mx-3" href={`https://youtube.com/watch?v=${e.link}`} target="_blank">Learn now &rarr;</a>
-            </div>
-          ) : (
-            <div className="bg-base-200 rounded-md my-2 p-3 flex items-center justify-between">
-              <div className="flex items-center justify-start">
-              <img src={getFavicon(e.link)} onError={(e) => { e.target.src = browser; }} className="h-14 mx-3" />
               <div>
-                <h2 className="text-xl text-white my-2">
-                  {e.additionalInfo.title}
-                </h2>
-                <h2 className="text-md">{e.additionalInfo.desc}</h2>
-              </div>
-              </div>
-                <a className="btn btn-secondary mx-3" href={e.link} target="_blank">Learn now &rarr;</a>
+                <a className="btn btn-secondary mx-3" href={e.type == "video" ?`https://youtube.com/watch?v=${e.link}`:e.link} target="_blank">Learn now &rarr;</a>
+                {!e.isLearnt?<input type="checkbox" className="checkbox" onClick={() => handleLeant(e._id)} />:<input type="checkbox" className="checkbox" disabled defaultChecked />}
+                </div>
             </div>
-          )}
         </div>
       ))}
     </div>

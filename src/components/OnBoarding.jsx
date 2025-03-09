@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom"
 import { useUser } from '../context/userContext';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 
 const OnBoarding = () => {
   const [name, setName] = useState('');
