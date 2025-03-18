@@ -21,7 +21,7 @@ const Signup = () => {
 
   return (
     <div className="container mx-auto p-4 flex flex-col gap-4 items-center min-h-screen">
-      <h1 className="text-3xl text-white my-9">Sign Up</h1>
+      <h1 className="text-3xl text-primary-c my-9">Sign Up</h1>
       <form onSubmit={handleSubmit} className="space-y-4 md:w-[40%]">
         <label className="input input-bordered flex items-center gap-2">
           <svg

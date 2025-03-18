@@ -14,7 +14,7 @@ const OnBoarding = () => {
   const {updateUser} = useUser();
   const {user} = useAuth();
 
-  if (user.interests && user.name){
+  if (user.interests.length > 0 && user.name){
     navigate("/dashboard")
   }
 
