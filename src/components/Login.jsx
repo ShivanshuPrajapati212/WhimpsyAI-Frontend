@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/authContext.jsx';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 

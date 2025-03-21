@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthProvider } from "../context/authContext";
+import { AuthProvider } from "../context/authContext.jsx";
 import { UserProvider } from "../context/userContext";
 import { TopicProvider } from "../context/topicContext"
 
