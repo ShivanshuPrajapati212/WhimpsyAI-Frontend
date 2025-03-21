@@ -26,7 +26,7 @@ const Home = () => {
       <button className="btn btn-info">
       <a href="/onboarding">On Boarding</a>
       </button>
-      <button className="btn btn-secondary" onClick={handleLogout}>
+      <button className="btn btn-primary" onClick={handleLogout}>
         <a>Logout</a>
       </button>
       <button className="btn btn-accent">

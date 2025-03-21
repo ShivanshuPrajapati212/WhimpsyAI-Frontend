@@ -13,12 +13,10 @@ export const TopicProvider = ({ children }) => {
 
     const {checkAuthStatus} = useAuth();
 
-    useEffect(()=> {
-        getTopic()
-    }, [])
-    
+
     const getTopic = async () => {
         try {
+            checkAuthStatus()
             const res = await axios.get('/api/topic/gettopic', { withCredentials: true })
             setTopic(res.data)
             setTimeLeft(timeLeftBefore24Hours(res.data.date))

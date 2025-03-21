@@ -68,13 +68,13 @@ const Signup = () => {
             required={true}
           />
         </label>
-        <button className="btn btn-secondary btn-block font-semibold">
+        <button className="btn btn-primary btn-block font-semibold">
           Sign Up
         </button>
       </form>
       <div className="flex flex-col border-opacity-50 md:w-[40%]">
   <div className="divider">OR</div>
-  <a className="btn btn-secondary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4" href="/api/auth/google">
+  <a className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4" href="/api/auth/google">
   <FcGoogle className="text-3xl"/>Sign up with Google
         </a>
 </div>

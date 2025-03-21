@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
-    <div className="font-body">
+    <div className="font-body bg-base-100">
       <Router>
         <Provider>
           <Routes>

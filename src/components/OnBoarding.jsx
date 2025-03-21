@@ -4,19 +4,21 @@ import { useUser } from '../context/userContext';
 import { useAuth } from '../context/authContext';
 
 const OnBoarding = () => {
+  const {user} = useAuth();
+  const navigate = useNavigate();
+
+  if (user.interests.length > 0 && user.name){
+    navigate("/dashboard")
+  }
+
   const [name, setName] = useState('');
   const [currentInterest, setCurrentInterest] = useState('');
   const [interests, setInterests] = useState([]);
   const [step, setStep] = useState(1);
   const [error, setError] = useState('');
 
-  const navigate = useNavigate();
   const {updateUser} = useUser();
-  const {user} = useAuth();
 
-  if (user.interests.length > 0 && user.name){
-    navigate("/dashboard")
-  }
 
   // Predefined interest suggestions
   const interestSuggestions = [
@@ -77,8 +79,8 @@ const OnBoarding = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl">
+    <div className="min-h-screen bg-base-100 flex items-center justify-center">
+      <div className="card w-full max-w-md shadow-xl">
         
         {/* Progress indicator */}
         <progress 
@@ -114,7 +116,7 @@ const OnBoarding = () => {
               
               <button
                 onClick={handleNextStep}
-                className="btn btn-secondary w-full"
+                className="btn btn-primary w-full"
               >
                 Continue
               </button>
@@ -144,7 +146,7 @@ const OnBoarding = () => {
                   />
                   <button
                     onClick={handleAddInterest}
-                    className="btn btn-secondary join-item"
+                    className="btn btn-primary join-item"
                   >
                     Add
                   </button>
@@ -157,7 +159,7 @@ const OnBoarding = () => {
               {/* Interest tags */}
               <div className="flex flex-wrap gap-2 min-h-16">
                 {interests.map((interest, index) => (
-                  <div key={index} className="badge badge-lg badge-secondary gap-1">
+                  <div key={index} className="badge badge-lg badge-primary gap-1">
                     <span>{interest}</span>
                     <button
                       onClick={() => handleRemoveInterest(interest)}
@@ -181,7 +183,7 @@ const OnBoarding = () => {
                       onClick={() => selectSuggestion(suggestion)}
                       className={`badge ${
                         interests.includes(suggestion) 
-                          ? 'badge-secondary p-3' 
+                          ? 'badge-primary p-3' 
                           : 'badge-outline p-3'
                       }`}
                     >
@@ -200,7 +202,7 @@ const OnBoarding = () => {
                 </button>
                 <button
                   onClick={handleComplete}
-                  className="btn btn-secondary flex-1"
+                  className="btn btn-primary flex-1"
                 >
                   Complete
                 </button>
@@ -226,14 +228,14 @@ const OnBoarding = () => {
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   {interests.map((interest, index) => (
-                    <div key={index} className="badge badge-secondary p-3">{interest}</div>
+                    <div key={index} className="badge badge-primary p-3">{interest}</div>
                   ))}
                 </div>
               </div>
               
               <button
                 onClick={() => {navigate("/dashboard")}}
-                className="btn btn-secondary w-full"
+                className="btn btn-primary w-full"
               >
                 Start Learning
               </button>
