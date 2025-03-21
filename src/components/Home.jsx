@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext.jsx";
-
+import { useAuth } from "../context/authContext";
 
 const Home = () => {
   const { logout } = useAuth();
