@@ -7,7 +7,10 @@ configDotenv()
 export default defineConfig({
   server:{
     proxy: {
-      "/api": "https://whimpsyai-backend.vercel.app"
+      "/api": {
+        target: 'https://whimpsyai-backend.vercel.app',
+        changeOrigin: true
+      },
     }
   },
   plugins: [react()],
