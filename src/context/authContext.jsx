@@ -1,5 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { BACKEND_URL } from '../helpers/backendUrl';
+
+console.log(BACKEND_URL)
 
 const AuthContext = createContext();
 
@@ -13,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get('/api/auth/profile', { withCredentials: true });
+      const response = await axios.get(`${BACKEND_URL}/api/auth/profile`, { withCredentials: true });
       setUser(response.data);
     } catch (err) {
       setUser(null);
@@ -23,18 +26,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (credentials) => {
-    await axios.post('/api/auth/login', credentials, { withCredentials: true });
+    await axios.post(`${BACKEND_URL}/api/auth/login`, credentials, { withCredentials: true });
     await checkAuthStatus();
     return;
   };
   const signup = async (credentials) => {
-    await axios.post('/api/auth/signup', credentials, { withCredentials: true });
+    await axios.post(`${BACKEND_URL}/api/auth/signup`, credentials, { withCredentials: true });
     await checkAuthStatus();
     return;
   };
 
   const logout = async () => {
-    await axios.post('/api/auth/logout', {}, { withCredentials: true });
+    await axios.post(`${BACKEND_URL}/api/auth/logout`, {}, { withCredentials: true });
     setUser(null);
   };
 

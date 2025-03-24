@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext.jsx";
 import { FcGoogle } from "react-icons/fc";
+import { BACKEND_URL } from '../helpers/backendUrl';
 
 
 const Signup = () => {
@@ -74,7 +75,7 @@ const Signup = () => {
       </form>
       <div className="flex flex-col border-opacity-50 md:w-[40%]">
   <div className="divider">OR</div>
-  <a className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4" href="/api/auth/google">
+  <a className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4" href={`${BACKEND_URL}/api/auth/google`}>
   <FcGoogle className="text-3xl"/>Sign up with Google
         </a>
 </div>

@@ -2,8 +2,11 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import timeLeftBefore24Hours from "../helpers/timeDifference";
 import { useAuth } from './authContext';
+import { BACKEND_URL } from '../helpers/backendUrl';
 
 const TopicContext = createContext();
+
+
 
 
 export const TopicProvider = ({ children }) => {
@@ -14,10 +17,12 @@ export const TopicProvider = ({ children }) => {
     const {checkAuthStatus} = useAuth();
 
 
+
+
     const getTopic = async () => {
         try {
             checkAuthStatus()
-            const res = await axios.get('/api/topic/gettopic', { withCredentials: true })
+            const res = await axios.get(`${BACKEND_URL}/api/topic/gettopic`, { withCredentials: true })
             setTopic(res.data)
             setTimeLeft(timeLeftBefore24Hours(res.data.date))
             setLoading(false);
@@ -29,7 +34,7 @@ export const TopicProvider = ({ children }) => {
 
     const markLearnt  = async (id) => {
       try { 
-        const res = await axios.post('/api/topic/marklearnt', {resourceId: id}, { withCredentials: true })
+        const res = await axios.post(`${BACKEND_URL}/api/topic/marklearnt`, {resourceId: id}, { withCredentials: true })
         setTopic(res.data)
         checkAuthStatus();
       } catch (error) {
