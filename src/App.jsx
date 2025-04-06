@@ -8,6 +8,9 @@ import OnBoarding from "./components/OnBoarding.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Provider from "./components/Provider.jsx";
 import Navbar from "./components/Navbar.jsx";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
