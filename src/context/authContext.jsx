@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     const res = await axios.post(`${BACKEND_URL}/api/auth/login`, credentials, { withCredentials: true });
-    await checkAuthStatus();
     console.log(res.data)
+    await checkAuthStatus();
     return;
   };
   const signup = async (credentials) => {
