@@ -17,9 +17,11 @@ export const AuthProvider = ({ children }) => {
   const checkAuthStatus = async () => {
     try {
       const response = await axios.get(`${BACKEND_URL}/api/auth/profile`, { withCredentials: true });
+      console.log(response.data)
       setUser(response.data);
     } catch (err) {
       setUser(null);
+      console.log("Failed to set user, ", err)
     }
     setLoading(false);
     return;
