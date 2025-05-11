@@ -4,6 +4,9 @@ import { BACKEND_URL } from '../helpers/backendUrl';
 
 console.log(BACKEND_URL)
 
+// Configure axios defaults
+axios.defaults.withCredentials = true;
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -16,7 +19,13 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/api/auth/profile`, { withCredentials: true });
+      const response = await axios.get(`${BACKEND_URL}/api/auth/profile`, { 
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
       console.log(response.data)
       setUser(response.data);
     } catch (err) {
@@ -28,11 +37,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (credentials) => {
-    const res = await axios.post(`${BACKEND_URL}/api/auth/login`, credentials, { withCredentials: true });
-    console.log(res.data)
-    await checkAuthStatus();
-    return;
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/auth/login`, credentials, { 
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log("Login response:", response.data);
+      await checkAuthStatus();
+      return response.data;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    }
   };
+
   const signup = async (credentials) => {
     await axios.post(`${BACKEND_URL}/api/auth/signup`, credentials, { withCredentials: true });
     await checkAuthStatus();
