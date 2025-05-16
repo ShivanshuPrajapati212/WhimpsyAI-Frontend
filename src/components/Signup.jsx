@@ -4,25 +4,52 @@ import { useAuth } from "../context/authContext.jsx";
 import { FcGoogle } from "react-icons/fc";
 import { BACKEND_URL } from '../helpers/backendUrl';
 
-
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { signup, user } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+    
     try {
       await signup({ email, password });
+      navigate('/dashboard');
     } catch (error) {
-      console.error("Signup failed", error);
+      setError('Signup failed. Email may already be taken or server error occurred.');
+      console.error("Signup error:", error);
+    } finally {
+      setLoading(false);
     }
   };
+  
+  const handleGoogleSignup = (e) => {
+    e.preventDefault();
+    // Direct redirect to Google OAuth endpoint
+    window.location.href = `${BACKEND_URL}/api/auth/google`;
+  };
+
+  // If already logged in, redirect to dashboard
+  if (user) {
+    navigate('/dashboard');
+    return null;
+  }
 
   return (
     <div className="container mx-auto p-4 flex flex-col gap-4 items-center min-h-screen">
       <h1 className="text-3xl text-primary-c my-9">Sign Up</h1>
+      
+      {error && (
+        <div className="alert alert-error md:w-[40%]">
+          <span>{error}</span>
+        </div>
+      )}
+      
       <form onSubmit={handleSubmit} className="space-y-4 md:w-[40%]">
         <label className="input input-bordered flex items-center gap-2">
           <svg
@@ -39,9 +66,7 @@ const Signup = () => {
             className="grow"
             placeholder="sam@tower.com"
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={(e) => setEmail(e.target.value)}
             required={true}
           />
         </label>
@@ -63,24 +88,30 @@ const Signup = () => {
             className="grow"
             placeholder="••••••••"
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            onChange={(e) => setPassword(e.target.value)}
             required={true}
           />
         </label>
-        <button className="btn btn-primary btn-block font-semibold">
-          Sign Up
+        <button 
+          className="btn btn-primary btn-block font-semibold"
+          disabled={loading}
+        >
+          {loading ? 'Signing up...' : 'Sign Up'}
         </button>
       </form>
+      
       <div className="flex flex-col border-opacity-50 md:w-[40%]">
-  <div className="divider">OR</div>
-  <a className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4" href={`${BACKEND_URL}/api/auth/google`}>
-  <FcGoogle className="text-3xl"/>Sign up with Google
-        </a>
-</div>
+        <div className="divider">OR</div>
+        <button 
+          className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4"
+          onClick={handleGoogleSignup}
+        >
+          <FcGoogle className="text-3xl"/>Sign up with Google
+        </button>
+      </div>
+      
       <a href="/login" className="font-medium underline">
-        Have a account?
+        Have an account?
       </a>
     </div>
   );

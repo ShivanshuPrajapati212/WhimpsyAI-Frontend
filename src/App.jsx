@@ -8,9 +8,7 @@ import OnBoarding from "./components/OnBoarding.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Provider from "./components/Provider.jsx";
 import Navbar from "./components/Navbar.jsx";
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
+import AuthCallback from "./components/AuthCallback.jsx";
 
 function App() {
   return (
@@ -21,6 +19,7 @@ function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/signup" exact element={<Signup />} />
+            <Route path="/auth-callback" exact element={<AuthCallback />} />
             <Route
               path="/profile"
               exact
