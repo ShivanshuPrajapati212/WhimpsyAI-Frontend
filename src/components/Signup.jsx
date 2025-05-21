@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext.jsx";
 import { FcGoogle } from "react-icons/fc";
@@ -7,22 +7,32 @@ import { BACKEND_URL } from '../helpers/backendUrl';
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [localError, setLocalError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signup, user } = useAuth();
+  const { signup, user, error: authError } = useAuth();
   const navigate = useNavigate();
+
+  // Use auth context error if available
+  useEffect(() => {
+    if (authError) {
+      setLocalError(authError);
+    }
+  }, [authError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setLocalError("");
     setLoading(true);
     
     try {
-      await signup({ email, password });
-      navigate('/dashboard');
+      const result = await signup({ email, password });
+      if (result.success) {
+        navigate('/dashboard');
+      } else {
+        setLocalError(result.message || 'Signup failed. Please try again.');
+      }
     } catch (error) {
-      setError('Signup failed. Email may already be taken or server error occurred.');
-      console.error("Signup error:", error);
+      setLocalError('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -44,9 +54,9 @@ const Signup = () => {
     <div className="container mx-auto p-4 flex flex-col gap-4 items-center min-h-screen">
       <h1 className="text-3xl text-primary-c my-9">Sign Up</h1>
       
-      {error && (
+      {localError && (
         <div className="alert alert-error md:w-[40%]">
-          <span>{error}</span>
+          <span>{localError}</span>
         </div>
       )}
       

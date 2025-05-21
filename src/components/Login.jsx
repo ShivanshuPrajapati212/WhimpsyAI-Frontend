@@ -25,10 +25,14 @@ const Login = () => {
     setLoading(true);
     
     try {
-      await login({ email, password });
-      navigate('/dashboard');
+      const result = await login({ email, password });
+      if (result.success) {
+        navigate('/dashboard');
+      } else {
+        setLocalError(result.message || 'Login failed. Please check your credentials.');
+      }
     } catch (error) {
-      setLocalError(error.response?.data?.message || 'Login failed. Please check your credentials.');
+      setLocalError('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
