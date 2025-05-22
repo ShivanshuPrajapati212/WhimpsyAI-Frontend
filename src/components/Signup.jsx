@@ -27,7 +27,7 @@ const Signup = () => {
     try {
       const result = await signup({ email, password });
       if (result.success) {
-        navigate('/dashboard');
+        navigate('/onboarding');
       } else {
         setLocalError(result.message || 'Signup failed. Please try again.');
       }
@@ -45,10 +45,13 @@ const Signup = () => {
   };
 
   // If already logged in, redirect to dashboard
-  if (user) {
-    navigate('/dashboard');
+  useEffect(()=>{
+if (user) {
+    navigate('/onboarding');
     return null;
   }
+  }, [])
+  
 
   return (
     <div className="container mx-auto p-4 flex flex-col gap-4 items-center min-h-screen">

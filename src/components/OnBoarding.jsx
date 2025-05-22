@@ -1,64 +1,73 @@
-import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom"
-import { useUser } from '../context/userContext';
-import { useAuth } from '../context/authContext';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
+import { useAuth } from "../context/authContext";
 
 const OnBoarding = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  if (user.interests.length > 0 && user.name){
-    navigate("/dashboard")
-  }
-
-  const [name, setName] = useState('');
-  const [currentInterest, setCurrentInterest] = useState('');
+  useEffect(() => {
+    if (user.interests.length > 0 && user.name) {
+      navigate("/dashboard");
+    }
+  }, []);
+  const [name, setName] = useState("");
+  const [currentInterest, setCurrentInterest] = useState("");
   const [interests, setInterests] = useState([]);
   const [step, setStep] = useState(1);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  const {updateUser} = useUser();
-
+  const { updateUser } = useUser();
 
   // Predefined interest suggestions
   const interestSuggestions = [
-    'Photography', 'Cooking', 'Hiking', 'Reading',
-    'Music', 'Gaming', 'Travel', 'Art',
-    'Technology', 'Fitness', 'Movies', 'Writing'
+    "Photography",
+    "Cooking",
+    "Hiking",
+    "Reading",
+    "Music",
+    "Gaming",
+    "Travel",
+    "Art",
+    "Technology",
+    "Fitness",
+    "Movies",
+    "Writing",
   ];
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-    if (e.target.value.trim()) setError('');
+    if (e.target.value.trim()) setError("");
   };
 
   const handleNextStep = () => {
-    if (name.trim() === '') {
-      setError('Please enter your name');
+    if (name.trim() === "") {
+      setError("Please enter your name");
       return;
     }
     setStep(2);
   };
 
   const handleAddInterest = () => {
-    if (currentInterest.trim() === '') return;
-    
+    if (currentInterest.trim() === "") return;
+
     if (!interests.includes(currentInterest)) {
       setInterests([...interests, currentInterest]);
     }
-    
-    setCurrentInterest('');
+
+    setCurrentInterest("");
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       handleAddInterest();
     }
   };
 
   const handleRemoveInterest = (interestToRemove) => {
-    setInterests(interests.filter(interest => interest !== interestToRemove));
+    setInterests(interests.filter((interest) => interest !== interestToRemove));
   };
 
   const selectSuggestion = (suggestion) => {
@@ -69,35 +78,36 @@ const OnBoarding = () => {
 
   const handleComplete = () => {
     if (interests.length === 0) {
-      setError('Please add at least one interest');
+      setError("Please add at least one interest");
       return;
     }
     // Here you would typically send the data to your backend
-    updateUser({name, interests})
-    console.log(user)
+    updateUser({ name, interests });
+    console.log(user);
     setStep(3);
   };
 
   return (
     <div className="min-h-screen bg-base-100 flex items-center justify-center">
       <div className="card w-full max-w-md shadow-xl">
-        
         {/* Progress indicator */}
-        <progress 
+        <progress
           className="progress progress-secondary w-full"
-          value={step === 3 ? 100 : step === 2 ? 66 : 0} 
+          value={step === 3 ? 100 : step === 2 ? 66 : 0}
           max="100"
         ></progress>
-        
+
         <div className="card-body">
           {/* Step 1: Name input */}
           {step === 1 && (
             <div className="space-y-6">
               <div className="text-center">
                 <h1 className="text-2xl font-bold mb-2">Welcome!</h1>
-                <p className="text-base-content text-opacity-70">Let's start with your name</p>
+                <p className="text-base-content text-opacity-70">
+                  Let's start with your name
+                </p>
               </div>
-              
+
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Your name</span>
@@ -109,11 +119,13 @@ const OnBoarding = () => {
                   className="input input-bordered w-full"
                   placeholder="Enter your name"
                 />
-                {error && <label className="label">
-                  <span className="label-text-alt text-error">{error}</span>
-                </label>}
+                {error && (
+                  <label className="label">
+                    <span className="label-text-alt text-error">{error}</span>
+                  </label>
+                )}
               </div>
-              
+
               <button
                 onClick={handleNextStep}
                 className="btn btn-primary w-full"
@@ -122,15 +134,17 @@ const OnBoarding = () => {
               </button>
             </div>
           )}
-          
+
           {/* Step 2: Interests selection */}
           {step === 2 && (
             <div className="space-y-6">
               <div className="text-center">
                 <h1 className="text-2xl font-bold mb-2">Hi, {name}!</h1>
-                <p className="text-base-content text-opacity-70">Tell us about your interests</p>
+                <p className="text-base-content text-opacity-70">
+                  Tell us about your interests
+                </p>
               </div>
-              
+
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Your interests</span>
@@ -151,15 +165,20 @@ const OnBoarding = () => {
                     Add
                   </button>
                 </div>
-                {error && <label className="label">
-                  <span className="label-text-alt text-error">{error}</span>
-                </label>}
+                {error && (
+                  <label className="label">
+                    <span className="label-text-alt text-error">{error}</span>
+                  </label>
+                )}
               </div>
-              
+
               {/* Interest tags */}
               <div className="flex flex-wrap gap-2 min-h-16">
                 {interests.map((interest, index) => (
-                  <div key={index} className="badge badge-lg badge-primary gap-1">
+                  <div
+                    key={index}
+                    className="badge badge-lg badge-primary gap-1"
+                  >
                     <span>{interest}</span>
                     <button
                       onClick={() => handleRemoveInterest(interest)}
@@ -170,7 +189,7 @@ const OnBoarding = () => {
                   </div>
                 ))}
               </div>
-              
+
               {/* Suggested interests */}
               <div>
                 <label className="label">
@@ -182,9 +201,9 @@ const OnBoarding = () => {
                       key={index}
                       onClick={() => selectSuggestion(suggestion)}
                       className={`badge ${
-                        interests.includes(suggestion) 
-                          ? 'badge-primary p-3' 
-                          : 'badge-outline p-3'
+                        interests.includes(suggestion)
+                          ? "badge-primary p-3"
+                          : "badge-outline p-3"
                       }`}
                     >
                       {suggestion}
@@ -192,7 +211,7 @@ const OnBoarding = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={() => setStep(1)}
@@ -209,7 +228,7 @@ const OnBoarding = () => {
               </div>
             </div>
           )}
-          
+
           {/* Step 3: Completion */}
           {step === 3 && (
             <div className="space-y-6 text-center">
@@ -220,7 +239,7 @@ const OnBoarding = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div>
                 <h1 className="text-2xl font-bold mb-2">All set, {name}!</h1>
                 <p className="text-base-content text-opacity-70">
@@ -228,13 +247,17 @@ const OnBoarding = () => {
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   {interests.map((interest, index) => (
-                    <div key={index} className="badge badge-primary p-3">{interest}</div>
+                    <div key={index} className="badge badge-primary p-3">
+                      {interest}
+                    </div>
                   ))}
                 </div>
               </div>
-              
+
               <button
-                onClick={() => {navigate("/dashboard")}}
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
                 className="btn btn-primary w-full"
               >
                 Start Learning

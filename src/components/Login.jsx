@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../context/authContext.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/authContext.jsx";
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { BACKEND_URL } from '../helpers/backendUrl';
+import { BACKEND_URL } from "../helpers/backendUrl";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [localError, setLocalError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [localError, setLocalError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login, user, error: authError } = useAuth();
   const navigate = useNavigate();
@@ -21,18 +21,20 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLocalError('');
+    setLocalError("");
     setLoading(true);
-    
+
     try {
       const result = await login({ email, password });
       if (result.success) {
-        navigate('/dashboard');
+        navigate("/onboarding");
       } else {
-        setLocalError(result.message || 'Login failed. Please check your credentials.');
+        setLocalError(
+          result.message || "Login failed. Please check your credentials."
+        );
       }
     } catch (error) {
-      setLocalError('An unexpected error occurred. Please try again.');
+      setLocalError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -45,21 +47,23 @@ const Login = () => {
   };
 
   // If already logged in, redirect to dashboard
-  if (user) {
-    navigate('/dashboard');
-    return null;
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/onboarding");
+      return null;
+    }
+  }, []);
 
   return (
     <div className="container mx-auto p-4 flex flex-col gap-4 items-center min-h-screen">
       <h1 className="text-3xl text-primary my-9">Login</h1>
-      
+
       {localError && (
         <div className="alert alert-error md:w-[40%]">
           <span>{localError}</span>
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="space-y-4 md:w-[40%]">
         <label className="input input-bordered flex items-center gap-2">
           <svg
@@ -102,24 +106,25 @@ const Login = () => {
             required={true}
           />
         </label>
-        <button 
+        <button
           className="btn btn-primary btn-block font-semibold"
           disabled={loading}
         >
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
-      
+
       <div className="flex flex-col border-opacity-50 md:w-[40%]">
         <div className="divider">OR</div>
-        <button 
+        <button
           className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4"
           onClick={handleGoogleLogin}
         >
-          <FcGoogle className="text-3xl"/>Login with Google
+          <FcGoogle className="text-3xl" />
+          Login with Google
         </button>
       </div>
-      
+
       <a href="/signup" className="font-medium underline">
         Don't have an account?
       </a>
