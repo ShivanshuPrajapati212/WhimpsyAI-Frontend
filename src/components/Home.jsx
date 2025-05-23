@@ -1,5 +1,6 @@
 import Benefits from "./ui/Benefits";
 import Hero from "./ui/Hero";
+import Testimonials from "./ui/Testimonials";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
         <Hero />
       </div>
       <Benefits />
+      <Testimonials/>
     </div>
   );
 };

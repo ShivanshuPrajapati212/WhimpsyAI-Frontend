@@ -12,8 +12,7 @@ const Hero = () => {
           </h1>
           <h3 className="text-lg">
             WhimpsyAI delivers personalized, bite-sized lessons based on your
-            interests. Get a fresh nugget of knowledge every morning and turn
-            your curiosity into mastery—no fluff, all fun.
+            interests. By giving you <span className='underline decoration-wavy text-error'>3 youtube videos</span> and <span className='underline decoration-wavy text-accent'>5 articles</span> to learn from.
           </h3>
           <Link className="btn btn-primary mt-16" to='/signup'>
             Start Learning &rarr;
