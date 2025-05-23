@@ -64,7 +64,7 @@ const Dashboard = () => {
         </h1>
         <h2 className="text-xl max-md:text-lg">
           New Topic in:{" "}
-          <span className="text-primary">
+          <span className="text-secondary">
             {" "}
             {timeLeft[0]} Hours, {timeLeft[1]} Minutes
           </span>
@@ -74,7 +74,7 @@ const Dashboard = () => {
         <div key={e._id} className="relative space-y-5">
           <div className={`badge badge-soft absolute -top-2 left-2 ${e.type == "video" ? "badge-secondary": "badge-primary"} ${e.isLearnt ? "hidden": ""}`}>{e.type == "video" ? "Video": "Article"}</div>
           <div
-            className={`bg-base-200 rounded-md my-2 p-4 flex items-center justify-between max-md:justify-start max-md:items-start max-md:space-y-2 max-md:flex-col ${
+            className={`bg-base-300 text-base-content rounded-md my-2 p-4 flex items-center justify-between max-md:justify-start max-md:items-start max-md:space-y-2 max-md:flex-col ${
               e.isLearnt ? "opacity-40" : ""
             }`}
           >
@@ -93,10 +93,10 @@ const Dashboard = () => {
                 className="h-14 max-md:h-14 mx-3 max-md:mx-0 max-md:bg-base-300 max-md:p-2 max-md:rounded-lg"
               />
               <div>
-                <h2 className="text-xl max-md:text-xl text-primary my-2">
+                <h2 className="text-xl max-md:text-xl font-semibold text-base-content my-2">
                   {e.additionalInfo.title}
                 </h2>
-                <h2 className="text-md text-primary-content max-md:hidden">{e.additionalInfo.desc}</h2>
+                <h2 className="text-md text-base-content max-md:hidden">{e.additionalInfo.desc}</h2>
               </div>
             </div>
             <div className="flex justify-between items-center">

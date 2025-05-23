@@ -50,7 +50,6 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       navigate("/onboarding");
-      return null;
     }
   }, []);
 
