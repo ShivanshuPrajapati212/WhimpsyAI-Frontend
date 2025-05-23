@@ -1,4 +1,5 @@
 import Benefits from "./ui/Benefits";
+import Faqs from "./ui/Faqs";
 import Hero from "./ui/Hero";
 import Pricing from "./ui/Pricing";
 import Testimonials from "./ui/Testimonials";
@@ -13,6 +14,7 @@ const Home = () => {
       <Testimonials/>
       <div className="container mx-auto bg-base-100 max-w-[60vw]">
         <Pricing />
+        <Faqs/>
       </div>
     </div>
   );

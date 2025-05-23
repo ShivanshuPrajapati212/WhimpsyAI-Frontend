@@ -6,7 +6,7 @@ const Pricing = () => {
   return (
     <div className="flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold">What this knowledge costs</h2>
-      <div className="flex items-center gap-20 my-10">
+      <div className="flex items-center gap-10 my-10">
         <li className="list-none flex flex-col items-center text-center bg-base-300 p-4 card rounded-3xl w-[20vw]">
           <p className="text-2xl font-semibold my-10">
             1 Year Pass
