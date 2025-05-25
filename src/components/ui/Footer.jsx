@@ -5,7 +5,7 @@ import { CiGlobe } from "react-icons/ci";
 
 const Footer = () => {
   return (
-    <div className='flex justify-around items-center py-14'>
+    <div className='flex max-md:flex-col justify-around max-md:justify-center items-center py-14 max-md:gap-5'>
       <div className='flex flex-col justify-start items-start'>
         <div className='flex gap-2 text-xl items-center justify-center font-semibold'>
         <img src={logo} alt=""  className='h-10'/>

@@ -3,8 +3,8 @@ import React from "react";
 const Faqs = () => {
   return (
     <div className="flex flex-col items-center py-10">
-      <h2 className="text-3xl font-bold mb-10">Frequently Asked Questions</h2>
-      <div className="flex flex-col gap-2 max-w-[40vw]">
+      <h2 className="text-3xl max-md:text-2xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
+      <div className="flex flex-col gap-2 w-[40vw] max-md:w-[90vw]">
         <div className="collapse collapse-arrow bg-base-100 border border-base-300">
           <input type="radio" name="faq-accordion" />
           <div className="collapse-title font-semibold">What is WhimpsyAI?</div>

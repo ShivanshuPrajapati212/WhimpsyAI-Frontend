@@ -3,9 +3,9 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 const Testimonials = () => {
   return (
     <div className="bg-base-300 flex flex-col items-center py-10">
-      <h2 className="text-3xl font-bold mb-10">Words from our learners</h2>
-      <div className="flex items-center justify-around gap-10 my-10">
-        <li className="list-none flex flex-col items-center justify-center text-center bg-base-200 p-4 card w-[20vw] h-72">
+      <h2 className="text-3xl max-md:text-2xl font-bold mb-10 text-center">Words from our learners</h2>
+      <div className="flex max-md:flex-col items-center justify-around gap-10 my-10">
+        <li className="list-none flex flex-col items-center justify-center text-center bg-base-200 p-4 card w-[20vw] max-md:w-[90vw] h-72">
           <p className="text-lg font-medium my-3">
             WhimpsyAI has completely changed how I start my day.
           </p>
@@ -26,7 +26,7 @@ const Testimonials = () => {
             <MdOutlineStarPurple500 />
           </div>
         </li>
-        <li className="list-none flex flex-col items-center justify-center text-center bg-base-200 p-4 card w-[20vw] h-72 mb-20">
+        <li className="list-none flex flex-col items-center justify-center text-center bg-base-200 p-4 card w-[20vw] max-md:w-[90vw] h-72 mb-20 max-md:mb-0">
           <p className="text-lg font-medium my-3">
             It feels like this app just gets me.
           </p>
@@ -47,7 +47,7 @@ const Testimonials = () => {
             <MdOutlineStarPurple500 />
           </div>
         </li>
-        <li className="list-none flex flex-col items-center justify-center text-center bg-base-200 p-4 card w-[20vw] h-72">
+        <li className="list-none flex flex-col items-center justify-center text-center bg-base-200 p-4 card w-[20vw] max-md:w-[90vw] h-72">
           <p className="text-lg font-medium my-3">
             I didn’t think 5 minutes could make this much impact.
           </p>
