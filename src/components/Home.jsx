@@ -15,7 +15,6 @@ const Home = () => {
       <Benefits />
       <Testimonials/>
       <div className="container mx-auto bg-base-100 max-w-[60vw]">
-        <Pricing />
         <Faqs/>
       </div>
       <Cta/>
