@@ -26,7 +26,7 @@ const AuthCallback = () => {
         
         if (success) {
           // Redirect to dashboard on success
-          setTimeout(() => navigate('/onboarding'), 1500);
+          setTimeout(() => navigate('/onboarding'), 250);
         } else {
           setError('Authentication failed');
           setTimeout(() => navigate('/login'), 2000);
