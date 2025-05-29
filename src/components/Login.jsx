@@ -113,10 +113,10 @@ const Login = () => {
         </button>
       </form>
 
-      <div className="flex flex-col border-opacity-50 md:w-[40%]">
+      <div className="flex flex-col border-opacity-50 w-full md:w-[40%]">
         <div className="divider">OR</div>
         <button
-          className="btn btn-primary bg-white text-black btn-block font-semibold flex justify-center items-center gap-4"
+          className="btn btn-accent bg-white text-black btn-block font-semibold flex justify-center items-center gap-4"
           onClick={handleGoogleLogin}
         >
           <FcGoogle className="text-3xl" />
